@@ -60,6 +60,14 @@ check_port_in_use() {
     return 1 # Puerto libre
 }
 
+# Verificar si el comando 'host' está instalado (necesario para la verificación DNS)
+if ! command -v host &> /dev/null; then
+    print_message "El comando 'host' no está instalado. Instalando dnsutils..."
+    apt update
+    apt install -y dnsutils
+    print_success "dnsutils instalado correctamente."
+fi
+
 # Solicitar información necesaria
 while true; do
     read -p "Ingrese el dominio (ej: ejemplo.com): " DOMAIN

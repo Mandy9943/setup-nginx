@@ -20,6 +20,24 @@ Este repositorio contiene un script para configurar fácilmente Nginx con HTTPS 
 - Acceso root o privilegios sudo
 - Dominio configurado con registros DNS apuntando al servidor
 
+## Preparación del servidor
+
+Si está configurando un servidor nuevo, se recomienda actualizar el sistema e instalar Git primero:
+
+```bash
+# Actualizar lista de paquetes
+sudo apt update
+
+# Actualizar paquetes instalados
+sudo apt upgrade -y
+
+# Instalar actualizaciones de seguridad
+sudo apt dist-upgrade -y
+
+# Instalar Git si no está instalado
+sudo apt-get install git -y
+```
+
 ## Uso
 
 1. Clone este repositorio en su servidor:
