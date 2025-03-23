@@ -101,8 +101,9 @@ echo "Seleccione el tipo de aplicación:"
 echo "1) Next.js"
 echo "2) Express (Node.js)"
 echo "3) Rust (Actix)"
-echo "4) Aplicación web genérica"
-read -p "Opción (1-4): " APP_TYPE
+echo "4) Rust (Axum)"
+echo "5) Aplicación web genérica"
+read -p "Opción (1-5): " APP_TYPE
 
 # Verificar si Nginx ya está instalado
 if ! command -v nginx &> /dev/null; then
@@ -205,7 +206,39 @@ server {
 }
 EOF
         ;;
-    4) # Genérico
+    4) # Rust/Axum
+        print_message "Configurando para Rust (Axum)..."
+        cat > "$CONFIG_PATH" << EOF
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $DOMAIN_CONFIG;
+
+    # Configuración optimizada para Axum (procesamiento de imágenes)
+    client_max_body_size 100M;
+    proxy_read_timeout 300s;
+    proxy_connect_timeout 300s;
+    proxy_send_timeout 300s;
+
+    location / {
+        proxy_pass http://localhost:$PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        
+        # Configuración adicional para streaming/procesamiento pesado
+        proxy_buffering off;
+        proxy_request_buffering off;
+    }
+}
+EOF
+        ;;
+    5) # Genérico
         print_message "Configurando para aplicación web genérica..."
         cat > "$CONFIG_PATH" << EOF
 server {

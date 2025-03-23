@@ -6,7 +6,7 @@ Este repositorio contiene un script para configurar fácilmente Nginx con HTTPS 
 
 - Instalación y configuración automática de Nginx
 - Configuración de HTTPS mediante Certbot/Let's Encrypt
-- Soporte para diferentes tipos de aplicaciones (Next.js, Express, Rust/Actix, etc.)
+- Soporte para diferentes tipos de aplicaciones (Next.js, Express, Rust/Actix, Rust/Axum, etc.)
 - Detección de instalaciones previas (idempotente)
 - Validación de entradas para evitar configuraciones incorrectas
 - Configura el firewall (ufw) si está activo
@@ -63,7 +63,7 @@ sudo ./setup-nginx.sh
    - Dominio (ejemplo.com)
    - Si desea incluir o no el subdominio www
    - Puerto donde se ejecuta su aplicación
-   - Tipo de aplicación (Next.js, Express, Rust/Actix, o genérico)
+   - Tipo de aplicación (Next.js, Express, Rust/Actix, Rust/Axum, o genérico)
    - Correo electrónico para los certificados SSL
 
 ## Mejoras recientes
@@ -75,6 +75,16 @@ El script ahora incluye:
 - Opción para incluir o no el subdominio www
 - Soporte completo para IPv6
 - Configuración optimizada para diferentes tipos de aplicaciones
+- **Nuevo**: Soporte para aplicaciones Rust/Axum con optimización para procesamiento de imágenes
+
+## Configuraciones específicas
+
+### Rust/Axum para procesamiento de imágenes
+La configuración para Rust/Axum está optimizada para aplicaciones que realizan procesamiento intensivo como la manipulación de imágenes. Incluye:
+- Tamaño máximo de carga de 100MB
+- Tiempos de espera extendidos (300s)
+- Buffering desactivado para mejor rendimiento con streams
+- Configuración optimizada para WebSockets
 
 ## Múltiples aplicaciones
 
