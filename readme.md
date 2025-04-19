@@ -44,7 +44,7 @@ sudo apt-get install git -y
 
 ```bash
 git clone https://github.com/Mandy9943/setup-nginx
-cd setup-server
+cd setup-nginx
 ```
 
 2. Haga el script ejecutable:
