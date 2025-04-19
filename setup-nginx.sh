@@ -32,7 +32,8 @@ fi
 
 # Función para validar el dominio
 validate_domain() {
-    if [[ ! "$1" =~ ^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$ ]]; then
+    # Patrón actualizado que permite subdominios como api.lobbybot.ai
+    if [[ ! "$1" =~ ^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]; then
         return 1
     fi
     return 0
