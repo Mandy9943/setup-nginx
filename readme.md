@@ -43,8 +43,8 @@ sudo apt-get install git -y
 1. Clone este repositorio en su servidor:
 
 ```bash
-git clone https://github.com/tu-usuario/setup-server.git
-cd setup-server
+git clone https://github.com/Mandy9943/setup-nginx
+cd setup-nginx
 ```
 
 2. Haga el script ejecutable:
